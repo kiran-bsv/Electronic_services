@@ -13,7 +13,7 @@ import {
 // dotenv.config();
 // const API = process.env.API ;
 
-const API  = 'http://localhost:4002';
+const API  = 'http://localhost:4001';
 
 export const listProducts = () => async (dispatch) =>{
     dispatch({
@@ -22,7 +22,7 @@ export const listProducts = () => async (dispatch) =>{
 
     try{
         const {data} = await axios.get(API + '/api/products');
-        // const count = data.length;
+        const count = data.length;
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
             payload: data

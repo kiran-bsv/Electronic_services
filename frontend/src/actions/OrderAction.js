@@ -6,7 +6,7 @@ import { CART_EMPTY } from "../constants/CartConstant";
 // dotenv.config();
 
 // const API = process.env.API ;
-const API  = 'http://localhost:4002';
+const API  = 'http://localhost:4001';
 
 
 export const createdOrder = (order) => async (dispatch, getState) => {

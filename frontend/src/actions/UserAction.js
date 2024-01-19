@@ -1,10 +1,4 @@
-import { VENDOR_REGISTER_REQUEST, VENDOR_REGISTER_SUCCESS, VENDOR_REGISTER_FAIL,
-  USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS, 
-  USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, 
-  USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT, 
-  USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS,
-  VENDOR_SIGNIN_REQUEST, VENDOR_SIGNIN_SUCCESS, VENDOR_SIGNIN_FAIL
-} from "../constants/UserConstant"
+import { VENDOR_REGISTER_REQUEST, VENDOR_REGISTER_SUCCESS, VENDOR_REGISTER_FAIL,USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from "../constants/UserConstant"
 import axios from "../Axios"
 
 // import dotenv from 'dotenv'
@@ -15,10 +9,10 @@ const API  = 'http://localhost:4001';
 
 
 
-export const register = (name,email,password,address,phoneNumber,location) => async(dispatch) => {
+export const register = (name,email,password) => async(dispatch) => {
     dispatch({
         type: USER_REGISTER_REQUEST,
-        payload: {email, password,address,phoneNumber,location}
+        payload: {email, password}
     });
     try{
         const {data} = await axios.post(API +'/api/users/register', {name,email, password});
@@ -44,7 +38,7 @@ export const register = (name,email,password,address,phoneNumber,location) => as
 }
 
 
-export const registerVendor = (name, email, password,address, phoneNumber, shopName, shopAddress, businessTypes) => async (
+export const registerVendor = (name, email, password, shopName, shopAddress, businessTypes) => async (
   dispatch
 ) => {
   dispatch({
@@ -57,11 +51,9 @@ export const registerVendor = (name, email, password,address, phoneNumber, shopN
       name,
       email,
       password,
-      address,
-      phoneNumber,
       shopName,
       shopAddress,
-      businessTypes
+      businessTypes,
     });
 
     dispatch({
@@ -112,29 +104,6 @@ export const signin = (email,password) => async(dispatch) => {
     }
 }
 
-export const vendorsignin = (email,password) => async(dispatch) => {
-  dispatch({
-      type: VENDOR_SIGNIN_REQUEST,
-      payload: {email, password}
-  });
-  try{
-      const {data} = await axios.post(API +'/api/users/vendorsignin', {email, password});
-      dispatch({
-          type: VENDOR_SIGNIN_SUCCESS,
-          payload: data
-      });
-      localStorage.setItem('vendorInfo', JSON.stringify(data));
-  }
-  catch(error){
-      dispatch({
-          type: VENDOR_SIGNIN_FAIL,
-          payload: 
-              error.response && error.response.data.message
-                  ? error.response.data.message
-                  : error.message,
-      });
-  }
-}
 
 
 

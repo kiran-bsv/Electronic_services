@@ -13,7 +13,7 @@ vendorRouter.get('/seed', async (req, res) => {
 });
 
 vendorRouter.post(
-  '/vendorsignin',
+  '/signin',
   expressAsyncHandler(async (req, res) => {
     const vendor = await Vendor.findOne({ email: req.body.email });
 
@@ -35,7 +35,7 @@ vendorRouter.post(
 );
 
 vendorRouter.post(
-  '/registerVendor',
+  '/register',
   expressAsyncHandler(async (req, res) => {
     const vendor = new Vendor({
       name: req.body.name,
