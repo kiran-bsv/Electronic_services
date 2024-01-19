@@ -39,6 +39,9 @@ userRouter.post("/register", expressAsyncHandler(async (req,res) => {
     const user  = new User({
         name: req.body.name,
         email: req.body.email,
+        address: req.body.address,
+        location: req.body.location,
+        phoneNumber: req.body.phoneNumber,
         password: bcrypt.hashSync(req.body.password, 8)
     });
 
@@ -48,6 +51,9 @@ userRouter.post("/register", expressAsyncHandler(async (req,res) => {
         _id: createdUser._id,
         name: createdUser.name,
         email: createdUser.email,
+        address: createdUser.address,
+        location: createdUser.location,
+        phoneNumber: createdUser.phoneNumber,
         isAdmin: createdUser.isAdmin,
         token: generateToken(createdUser),
     })
